@@ -8,6 +8,6 @@ foo.append("sam")
 
 print(f'{sample_dict["foo"]}')
 
-foo = ['trump']
+foo.append('trump')
 print(f'{sample_dict["foo"]}')
 

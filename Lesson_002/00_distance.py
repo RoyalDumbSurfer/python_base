@@ -4,7 +4,7 @@
 #preaty print выводит на консоль инфу в более удобном для восприятия виде
 from pprint import pprint
 
-# Есть словарь координат городов. Слварь tuple с координатами x и y
+# Есть словарь координат городов. Словарь tuple с координатами x и y
 
 cities = {
     'Moscow': (550, 370),
@@ -48,6 +48,6 @@ distances['Paris']['London'] = paris_london
 
 pprint(distances)
 
-#print(distances['Moscow']['Paris'])
+#print(distances['Moscow']['London'])
 
 
