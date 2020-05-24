@@ -32,7 +32,8 @@ store = {
 }
 
 # Рассчитать на какую сумму лежит каждого товара на складе
-# например для ламп
+# Вариант_1
+# лампы, столы, диваны
 
 lamps_cost = store[goods['Лампа']][0]['quantity'] * store[goods['Лампа']][0]['price']
 print('Лампа -', store[goods['Лампа']][0]['quantity'], 'шт.', 'Стоимость -', lamps_cost, 'руб.' )
@@ -42,10 +43,38 @@ table_cost_2 = store[goods['Стол']][1]['quantity'] * store[goods['Стол']
 print('Стол_1 -', store[goods['Стол']][0]['quantity'], 'шт.', 'Стоимость -',  table_cost_1, 'руб.')
 print('Стол_2 -', store[goods['Стол']][1]['quantity'], 'шт.', 'Стоимость -',  table_cost_2, 'руб.')
 
+sofa_cost_1 = store[goods['Диван']][0]['quantity'] * store[goods['Диван']][0]['price']
+sofa_cost_2 = store[goods['Диван']][1]['quantity'] * store[goods['Диван']][1]['price']
+print('Диван_1 -', store[goods['Диван']][0]['quantity'], 'шт.', 'Стоимость -',  sofa_cost_1, 'руб.')
+print('Диван_2 -', store[goods['Диван']][1]['quantity'], 'шт.', 'Стоимость -',  sofa_cost_2, 'руб.')
+
+# Вариант_2
+# стулья
+
+cost_code = goods['Стул']
+
+chair_item_1 = store[cost_code][0]
+chair_item_2 = store[cost_code][1]
+chair_item_3 = store[cost_code][2]
+
+chair_quantity_1 = chair_item_1['quantity']
+chair_quantity_2 = chair_item_2['quantity']
+chair_quantity_3 = chair_item_3['quantity']
+
+chair_price_1 = chair_item_1['price']
+chair_price_2 = chair_item_2['price']
+chair_price_3 = chair_item_3['price']
+
+chair_cost_1 = chair_item_1['quantity'] * chair_item_1['price']
+chair_cost_2 = chair_item_2['quantity'] * chair_item_2['price']
+chair_cost_3 = chair_item_3['quantity'] * chair_item_3['price']
+
+print('Стул_1 -', chair_quantity_1, 'шт.', 'Стоимость -',  chair_cost_1, 'руб.')
+print('Стул_2 -', chair_quantity_2, 'шт.', 'Стоимость -',  chair_cost_2, 'руб.')
+print('Стул_3 -', chair_quantity_3, 'шт.', 'Стоимость -',  chair_cost_3, 'руб.')
 
 
-
-#Вариант_2
+# пример
 #lamp_code = goods['Лампа']
 #lamps_item = store[lamp_code][0]
 #lamps_quantity = lamps_item['quantity']
