@@ -14,7 +14,7 @@
 #  есть_конец_игры() - возвращает True если больше ходов сделать нельзя
 #
 #
-# В текущем модуле (lesson_006/python_snippets/04_practice.py) реализовать логику работы с пользователем:
+# В текущем модуле (lesson_006/python_snipptets/04_practice.py) реализовать логику работы с пользователем:
 #  начало игры,
 #  вывод расположения камней
 #  ввод первым игроком хода - позицию и кол-во камней
@@ -26,14 +26,19 @@ from nim_engine import put_stones, take_from_bunch, get_bunches, is_gameover
 
 put_stones()
 user_number = 1
+print('НАЧАЛО ИГРЫ!!!')
+
 while True:
     print('Текущая позиция', get_bunches())
     print('Ход игрока {}'.format(user_number))
     pos = input('Откуда берем?')
     qua = input('Сколько берем?')
-    take_from_bunch(position=int(pos), quantity=int(qua))
+    step_successed = take_from_bunch(position=int(pos), quantity=int(qua))
+    if step_successed:
+        user_number = 2 if user_number == 1 else 1
+    else:
+        print('Невозможный хуй')
     if is_gameover():
         break
-    user_number = 2 if user_number == 1 else 1
 
 print('Выиграл игрок', user_number)
