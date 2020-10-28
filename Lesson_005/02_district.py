@@ -8,28 +8,45 @@
 
 from central_street.house1 import room1
 
-print(room1.folks)
+print('На районе живут: ')
+print(', '.join(room1.folks))
+
 from central_street.house1 import room2
 
-print(room2.folks)
+print(', '.join(room2.folks))
 
 from central_street.house2 import room1
 
-print(room1.folks)
+print(', '.join(room1.folks))
 from central_street.house2 import room2
 
-print(room2.folks)
-
+print(', '.join(room2.folks))
 from soviet_street.house1 import room1
 
-print(room1.folks)
+print(', '.join(room1.folks))
 from soviet_street.house1 import room2
 
-print(room2.folks)
-
+print(', '.join(room2.folks))
 from soviet_street.house2 import room1
 
-print(room1.folks)
+print(', '.join(room1.folks))
 from soviet_street.house2 import room2
 
-print(room2.folks)
+print(', '.join(room2.folks))
+
+
+def find_list(pakage, list_name):
+    if list_name in pakage:
+        return print(', '.join(list_name))
+    for key, sub_pakage in pakage.items():
+        if isinstance(sub_pakage, list):
+            result = find_list(pakage=sub_pakage, list_name=list_name)
+            if result:
+                break
+    else:
+        result = None
+    return result
+
+
+res = find_list(pakage='soviet_street.house2', list_name=list)
+print(res)
