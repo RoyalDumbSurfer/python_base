@@ -22,9 +22,9 @@ class Man:
                 cprint('{} закупился хавчиком'.format(self.name), color='green')
                 self.sixpaks -= 2
                 self.food += 50
-                self.money -= 20
+                self.money -= 50
                 self.foolness -= 20
-                self.happyness += 15
+                self.happyness -= 15
             else:
                 cprint('У {} есть хавчик'.format(self.name), color='cyan')
         else:
@@ -34,7 +34,7 @@ class Man:
         if self.foolness <= 30:
             if self.food > 10:
                 cprint('{} поел'.format(self.name), color='green')
-                self.sixpaks += 5
+                self.sixpaks += 2
                 self.foolness += 50
                 self.happyness += 15
                 self.food -= 30
@@ -53,34 +53,27 @@ class Man:
 
     def play_DeusEx(self):
         cprint('{} играл в Deus EX'.format(self.name), color='magenta')
-        self.sixpaks += 5
+        self.sixpaks += 2
         self.foolness -= 10
-        self.happyness += 50
+        self.happyness += 20
 
     def livin_the_dream(self):
-        if self.foolness <= 0:
-            cprint('{} умер от голода...'.format(self.name), color='red')
-            return
-        if self.sixpaks >= 250:
-            cprint('{} умер от ожирения...'.format(self.name), color='red')
-            return
+        dice = randint(1, 6)
+        if self.foolness <= 30:
+            self.eat()
+        if self.food <= 30:
+            self.shopping()
+        if self.money < 20:
+            self.work()
+        if dice == 1:
+            self.eat()
+        elif dice == 2:
+            self.work()
+        elif dice == 3:
+            self.shopping()
         else:
-            dice = randint(1, 6)
-            if self.foolness <= 30:
-                self.eat()
-            if self.food <= 30:
-                self.shopping()
-            if self.money < 20:
-                self.work()
-            if dice == 1:
-                self.eat()
-            elif dice == 2:
-                self.work()
-            elif dice == 3:
-                self.shopping()
-            else:
-                self.play_DeusEx()
-            cprint(Benji, color='grey')
+            self.play_DeusEx()
+        cprint(Benji, color='grey')
 
 
 Benji = Man(name='Benji')
@@ -88,5 +81,11 @@ Benji = Man(name='Benji')
 cprint(Benji, color='yellow')
 
 for day in range(1, 366):
+    if Benji.foolness <= 0:
+        cprint('{} умер от голода...'.format(Benji.name), color='red')
+        break
+    if Benji.sixpaks >= 250:
+        cprint('{} умер от ожирения...'.format(Benji.name), color='red')
+        break
     print('===============================DAY {} =============================='.format(day))
     Benji.livin_the_dream()
