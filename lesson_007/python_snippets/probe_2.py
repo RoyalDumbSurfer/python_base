@@ -64,10 +64,10 @@ class Man:
 
     def into_the_house(self, house):
         self.house = house
+        self.happyness += 10
         self.foolness -= 10
         self.sixpaks -= 2
-        self.house.money -= 15
-        cprint('{} заселился на виллу!!!'.format(self.name), color='yellow')
+        cprint('{} заселился на виллу!!!'.format(self.name), color='red')
 
     def livin_the_dream(self):
         dice = randint(1, 6)
@@ -90,61 +90,48 @@ class Man:
 
 
 class House:
-    def __ini__(self):
-        self.food = 35
-        self.money = 50
+
+    def __init__(self):
+        self.food = 50
+        self.money = 30
+
     def __str__(self):
-        return 'Я - {}, сытость - {}, счастья в штанах - {}, вес - {}'.format(
-            self.name, self.foolness, self.happyness, self.sixpaks)
+        return 'В доме еды - {}, денег - {}'.format(self.food, self.money)
 
 
-Benji = Man(name='Бенджи')
-Beavis = Man(name='Бивис')
-Butthead = Man(name='Батхед')
+citizens = [
+    Man(name='Бенджи'),
+    Man(name='Бивис'),
+    Man(name='Батхед'),
+    Man(name='Валера'),
 
-cprint(Benji, color='yellow')
-cprint(Beavis, color='yellow')
-cprint(Butthead, color='yellow')
+]
+
+my_sweet_villa = House()
+for citizen in citizens:
+    citizen.into_the_house(house=my_sweet_villa)
+
+for citizen in citizens:
+    cprint(citizen, color='yellow')
+cprint(my_sweet_villa, color='yellow')
 
 for day in range(1, 366):
-    if Benji.happyness <= 0:
-        cprint('{} грустный'.format(Benji.name), color='red')
-    if Benji.foolness <= 0:
-        cprint('{} умер от голода...'.format(Benji.name), color='red')
+    if citizen.happyness <= 0:
+        cprint('{} грустный'.format(citizen.name), color='red')
+    if citizen.foolness <= 0:
+        cprint('{} умер от голода...'.format(citizen.name), color='red')
         break
-    if Benji.sixpaks >= 250:
-        cprint('{} умер от ожирения...'.format(Benji.name), color='red')
+    if citizen.sixpaks >= 250:
+        cprint('{} умер от ожирения...'.format(citizen.name), color='red')
         break
-    if Benji.sixpaks <= 35:
-        cprint('{} умер от истощения...'.format(Benji.name), color='red')
-        break
-    if Butthead.happyness <= 0:
-        cprint('{} грустный'.format(Butthead.name), color='red')
-    if Butthead.foolness <= 0:
-        cprint('{} умер от голода...'.format(Butthead.name), color='red')
-        break
-    if Butthead.sixpaks >= 250:
-        cprint('{} умер от ожирения...'.format(Butthead.name), color='red')
-        break
-    if Butthead.sixpaks <= 35:
-        cprint('{} умер от истощения...'.format(Butthead.name), color='red')
-        break
-    if Beavis.happyness <= 0:
-        cprint('{} грустный'.format(Beavis.name), color='red')
-    if Beavis.foolness <= 0:
-        cprint('{} умер от голода...'.format(Beavis.name), color='red')
-        break
-    if Beavis.sixpaks >= 250:
-        cprint('{} умер от ожирения...'.format(Beavis.name), color='red')
-        break
-    if Beavis.sixpaks <= 35:
-        cprint('{} умер от истощения...'.format(Beavis.name), color='red')
+    if citizen.sixpaks <= 35:
+        cprint('{} умер от истощения...'.format(citizen.name), color='red')
         break
 
     print('===============================DAY {} =============================='.format(day))
-    Benji.livin_the_dream()
-    Butthead.livin_the_dream()
-    Beavis.livin_the_dream()
-    cprint(Benji, color='grey')
-    cprint(Beavis, color='grey')
-    cprint(Butthead, color='grey')
+    for citizen in citizens:
+        citizen.livin_the_dream()
+    print('===============================END of THE DAY {}=============================='.format(day))
+    for citizen in citizens:
+        cprint(citizen, color='grey')
+    cprint(my_sweet_villa, color='grey')
