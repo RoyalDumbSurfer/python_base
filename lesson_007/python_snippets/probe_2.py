@@ -15,6 +15,7 @@ class Man:
         return 'Я - {}, сытость - {}, счастья в штанах - {}, вес - {}'.format(
             self.name, self.fullness, self.happyness, self.sixpaks)
 
+
     def shopping(self):
         if self.house.money > 20:
             if self.house.food < 30:
@@ -148,29 +149,91 @@ class Cat:
             self.cat_sleep()
 
 
+class Humster:
+    def __init__(self, name):
+        self.name = name
+        self.happyness = 10
+        self.fullness = 30
+        self.weight = 3
+
+    def __str__(self):
+        return 'Я - хомяк {}, happyness - {}, fullness - {}, weight - {}'.format(self.name,
+            self.happyness, self.fullness, self.weight)
+
+    def humster_into_the_house(self, house):
+        self.house = house
+        self.happyness += 10
+        self.fullness -= 0.5
+        self.weight -= 0.5
+        cprint('Хомяк {} заселилась на виллу!!!'.format(self.name), color='red')
+
+    def navodit_bardak(self):
+        cprint('{} Chaos in da house!'.format(self.name))
+        self.happyness += 5
+        self.fullness -= 0.5
+        self.weight -= 0.5
+
+    def humster_eat(self):
+        cprint('{} поела!'.format(self.name))
+        self.house.humster_food -= 5
+        self.fullness += 5
+        self.weight += 2
+
+    def humster_sleep(self):
+        cprint('{} дрыхнет...'.format(self.name))
+        self.weight += 2
+        self.happyness += 2
+
+    def livin_the_life(self):
+        dice = randint(1, 3)
+        if self.fullness <= 20:
+            self.humster_eat()
+        if self.happyness <= 7:
+            self.navodit_bardak()
+        if self.weight <= 2:
+            self.humster_eat()
+        if dice == 1:
+            self.humster_eat()
+        elif dice == 2:
+            self.navodit_bardak()
+        else:
+            self.humster_sleep()
+
+
 class House:
 
     def __init__(self):
         self.food = 50
         self.money = 30
         self.cat_food = 50
+        self.humster_food = 50
 
     def __str__(self):
         return 'В доме еды - {}, еды для кошки - {}, денег - {}'.format(self.food, self.cat_food, self.money)
 
 
 citizens = [
-    Man(name='Бенджи'),
+    Man(name='Olusha'),
+    Man(name='Dean'),
+    Man(name='Anna'),
+    Man(name='Ivan'),
+    Man(name='Dina')
 ]
 
 animals = [
-    Cat(name='Фаня')
+    Cat(name='Фаня'),
+]
+
+rodents = [
+    Humster(name='Гадя')
 ]
 
 my_sweet_villa = House()
 
 for animal in animals:
-    animal.cat_into_the_house(house=my_sweet_villa)
+    animal.cat_into_the_house(house=my_sweet_villa),
+for rodent in rodents:
+    rodent.humster_into_the_house(house=my_sweet_villa)
 
 for citizen in citizens:
     citizen.into_the_house(house=my_sweet_villa)
@@ -178,28 +241,37 @@ for citizen in citizens:
 for animal in animals:
     cprint(animal, color='cyan')
 
+for animal in rodents:
+    cprint(rodent, color='cyan')
+
 for citizen in citizens:
     cprint(citizen, color='yellow')
 
 cprint(my_sweet_villa, color='white')
 
-for day in range(1, 8):
+for day in range(1, 21):
     if animal.happyness <= 0:
+        cprint('{} в печали'.format(animal.name), color='red')
+    if rodent.happyness <= 0:
         cprint('{} в печали'.format(animal.name), color='red')
     if citizen.happyness <= 0:
         cprint('{} грустный'.format(citizen.name), color='red')
     if animal.fullness <= 0:
         cprint('{} орет хочет жрать'.format(animal.name), color='red')
+    if rodent.fullness <= 0:
+        cprint('{} орет хочет жрать'.format(animal.name), color='red')
     if citizen.fullness <= 0:
-        cprint('{} умер от голода...'.format(citizen.name), color='red')
+        cprint('{} want to eat!!!...'.format(citizen.name), color='red')
         break
     if citizen.sixpaks >= 250:
-        cprint('{} умер от ожирения...'.format(citizen.name), color='red')
+        cprint('{} CHUBY...'.format(citizen.name), color='red')
         break
     if citizen.sixpaks <= 35:
-        cprint('{} умер от истощения...'.format(citizen.name), color='red')
+        cprint('{} HUDOY...'.format(citizen.name), color='red')
         break
     if animal.weight <= 1:
+        cprint('{} ушла в другой дом'.format(animal.name), color='red')
+    if rodent.weight <= 1:
         cprint('{} ушла в другой дом'.format(animal.name), color='red')
 
     print('===============================DAY {} =============================='.format(day))
@@ -207,9 +279,13 @@ for day in range(1, 8):
         citizen.livin_the_dream()
     for animal in animals:
         animal.livin_the_life()
+    for rodent in rodents:
+        rodent.livin_the_life()
     print('===============================END of THE DAY {}=============================='.format(day))
     for animal in animals:
-        cprint(animal, color='grey')
+        cprint(animal, color='white')
+    for rodent in rodents:
+        cprint(rodent, color='white')
     for citizen in citizens:
-        cprint(citizen, color='grey')
-    cprint(my_sweet_villa, color='grey')
+        cprint(citizen, color='white')
+    cprint(my_sweet_villa, color='white')
