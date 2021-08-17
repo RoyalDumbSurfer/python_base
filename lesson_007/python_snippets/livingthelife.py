@@ -2,6 +2,15 @@ from random import randint
 from termcolor import cprint
 
 
+class Pet:
+    legs = 4
+    has_tail = True
+
+    def inspect(self):
+        print('Всего ног:', self.legs)
+        print('Хвост присутствует -', 'да' if self.has_tail else 'нет')
+
+
 class Man:
 
     def __init__(self, name):
@@ -14,7 +23,6 @@ class Man:
     def __str__(self):
         return 'Я - {}, сытость - {}, счастья в штанах - {}, вес - {}'.format(
             self.name, self.fullness, self.happyness, self.sixpaks)
-
 
     def shopping(self):
         if self.house.money > 20:
@@ -97,7 +105,7 @@ class Man:
             self.play_DeusEx()
 
 
-class Cat:
+class Cat(Pet):
 
     def __init__(self, name):
         self.name = name
@@ -149,7 +157,7 @@ class Cat:
             self.cat_sleep()
 
 
-class Humster:
+class Humster(Pet):
     def __init__(self, name):
         self.name = name
         self.happyness = 10
@@ -158,7 +166,8 @@ class Humster:
 
     def __str__(self):
         return 'Я - хомяк {}, happyness - {}, fullness - {}, weight - {}'.format(self.name,
-            self.happyness, self.fullness, self.weight)
+                                                                                 self.happyness, self.fullness,
+                                                                                 self.weight)
 
     def humster_into_the_house(self, house):
         self.house = house
@@ -209,7 +218,8 @@ class House:
         self.humster_food = 50
 
     def __str__(self):
-        return 'В доме еды - {}, еды для кошки - {}, денег - {}'.format(self.food, self.cat_food, self.money)
+        return 'В доме еды - {}, еды для кошки - {}, еды для хомяка - {},' \
+               ' денег - {}'.format(self.food, self.cat_food, self.humster_food, self.money)
 
 
 citizens = [
@@ -232,24 +242,27 @@ my_sweet_villa = House()
 
 for animal in animals:
     animal.cat_into_the_house(house=my_sweet_villa),
+
 for rodent in rodents:
-    rodent.humster_into_the_house(house=my_sweet_villa)
+    rodent.humster_into_the_house(house=my_sweet_villa),
 
 for citizen in citizens:
     citizen.into_the_house(house=my_sweet_villa)
 
 for animal in animals:
     cprint(animal, color='cyan')
+    animal.inspect()
 
 for animal in rodents:
     cprint(rodent, color='cyan')
+    rodent.inspect()
 
 for citizen in citizens:
     cprint(citizen, color='yellow')
 
 cprint(my_sweet_villa, color='white')
 
-for day in range(1, 21):
+for day in range(1, 2):
     if animal.happyness <= 0:
         cprint('{} в печали'.format(animal.name), color='red')
     if rodent.happyness <= 0:
