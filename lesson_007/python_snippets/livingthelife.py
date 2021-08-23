@@ -262,7 +262,7 @@ for citizen in citizens:
 
 cprint(my_sweet_villa, color='white')
 
-for day in range(1, 2):
+for day in range(1, 7):
     if animal.happyness <= 0:
         cprint('{} в печали'.format(animal.name), color='red')
     if rodent.happyness <= 0:
