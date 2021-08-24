@@ -142,7 +142,7 @@ class Wife:
     def clean_house(self):
         cprint('{} убралась в доме'.format(self.name, color='green'))
         self.fullness -= 10
-        self.house.dust -= 30
+        self.house.dust -= 40
 
     def pet_the_cat(self):
         self.happyness += 5
