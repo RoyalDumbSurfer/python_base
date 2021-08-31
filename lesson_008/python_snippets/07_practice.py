@@ -126,7 +126,7 @@ class Truck(Vehicle):
         print('{} выехал в путь'.format(self.model))
 
     def act(self):
-        if super().act():
+        if с:
             if isinstance(self.place, Road):
                 self.ride()
             else:
