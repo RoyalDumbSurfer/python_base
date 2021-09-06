@@ -1,5 +1,3 @@
-ddd = dict()
-names = ['dean', 'olusha', 'anna', 'ivan', 'anna', 'dina', 'olusha']
-for name in names:
-    ddd[name] = ddd.get(name, 0) + 1
-print(ddd)
+some_dict = {'a': 5, 'n': 3, 'z': 9}
+
+print(sorted([(v, k) for (k, v) in some_dict.items()], reverse=True))
