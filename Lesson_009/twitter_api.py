@@ -1,6 +1,6 @@
 import urllib.error, urllib.request, urllib.parse
 import json
-import twurl
+# import twurl
 
 TWITTER_URL = 'http://api.twitter.com/1.1/friends/list.json'
 
